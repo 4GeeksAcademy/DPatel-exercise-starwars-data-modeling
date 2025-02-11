@@ -16,6 +16,9 @@ class People(Base):
     height = Column(String(250))
     homeworld = Column(String(250))
 
+    favorite_id = Column(Integer, ForeignKey('favorites.id'))
+    Favorite = relationship(Favorite)
+
 class Vehicles(Base):
     __tablename__ = 'vehicles'
     id = Column(Integer, primary_key=True)
@@ -25,6 +28,9 @@ class Vehicles(Base):
     length = Column(String(250))
     Created = Column(String(250))
 
+    favorite_id = Column(Integer, ForeignKey('favorites.id'))
+    Favorite = relationship(Favorite)
+
 class Species(Base):
     __tablename__ = 'Species'
     id = Column(Integer, primary_key=True)
@@ -33,6 +39,13 @@ class Species(Base):
     Language = Column(String(250),)
     Average_Lifespan = Column(String(250))
     Classification = Column(String(250))
+
+class Favorite(Base):   
+   __tablename__ = 'Favorites'
+   id = Column(Integer, primary_key=True)
+   People_id = Column(Integer, ForeignKey("People.id"), nullable=True)
+   Vehicles_id = Column(Integer, ForeignKey("Vehicles.id"), nullable=True)
+
 
     def to_dict(self):
         return {}
